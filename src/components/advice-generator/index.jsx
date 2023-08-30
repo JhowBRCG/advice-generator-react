@@ -3,6 +3,7 @@ import { useState, useEffect } from "react";
 import { getRandomAdvice } from "../../services/random-advice";
 import divider from "../../assets/pattern-divider-desktop.svg";
 import dice from "../../assets/icon-dice.svg";
+import loadingImg from "../../assets/loading.gif";
 
 export const AdviceGenerator = () => {
   const [advice, setAdvice] = useState("");
@@ -11,7 +12,6 @@ export const AdviceGenerator = () => {
   const adviceData = async () => {
     const data = await getRandomAdvice();
     const { advice, id } = data;
-
     setAdvice(advice);
     setIdNumber(id);
   };
@@ -26,7 +26,7 @@ export const AdviceGenerator = () => {
         <Title>advice #{idNumber}</Title>
       </Header>
       <Content>
-        <Text>{advice}</Text>
+        {advice ? <Text>{advice}</Text> : <Loading src={loadingImg} />}
         <WrapperImg>
           <Img src={divider} />
         </WrapperImg>
@@ -96,4 +96,10 @@ const Button = styled.button`
   &:hover img {
     transform: rotate(360deg);
   }
+`;
+
+const Loading = styled.img`
+  margin: 0 auto;
+  display: block;
+  width: 60px;
 `;
