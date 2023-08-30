@@ -53,7 +53,7 @@ npm run dev
 
 <br>
 
-<!-- <h3 align = 'center'><a href = 'https://jhowbrcg.github.io/advice-generator-app/'>See the project</a></h3> -->
+<h3 align = 'center'><a href = 'https://ramdomadvice.netlify.app/'>See the demo</a></h3>
 
 <div align= 'left'>
 
