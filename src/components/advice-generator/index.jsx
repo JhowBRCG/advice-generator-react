@@ -6,14 +6,14 @@ import dice from "../../assets/icon-dice.svg";
 import loadingImg from "../../assets/loading.gif";
 
 export const AdviceGenerator = () => {
-  const [advice, setAdvice] = useState("");
-  const [idNumber, setIdNumber] = useState("");
+  const [advice, setAdvice] = useState({});
+  const [isLoading, setLoading] = useState(true);
 
   const adviceData = async () => {
+    setLoading(true);
     const data = await getRandomAdvice();
-    const { advice, id } = data;
-    setAdvice(advice);
-    setIdNumber(id);
+    setAdvice(data);
+    setLoading(false);
   };
 
   useEffect(() => {
@@ -23,10 +23,14 @@ export const AdviceGenerator = () => {
   return (
     <CardAdvice>
       <Header>
-        <Title>advice #{idNumber}</Title>
+        <Title>advice #{advice.id}</Title>
       </Header>
       <Content>
-        {advice ? <Text>{advice}</Text> : <Loading src={loadingImg} />}
+        {isLoading ? (
+          <Loading src={loadingImg} />
+        ) : (
+          <Text>{advice.advice}</Text>
+        )}
         <WrapperImg>
           <Img src={divider} />
         </WrapperImg>
