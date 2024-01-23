@@ -1,40 +1,34 @@
 import { styled } from "styled-components";
-import { useState, useEffect } from "react";
+import { useQuery } from "@tanstack/react-query";
 import { getRandomAdvice } from "../../services/random-advice";
 import divider from "../../assets/pattern-divider-desktop.svg";
 import dice from "../../assets/icon-dice.svg";
 import loadingImg from "../../assets/loading.gif";
 
 export const AdviceGenerator = () => {
-  const [advice, setAdvice] = useState({});
-  const [isLoading, setLoading] = useState(true);
+  const { data, isFetching, error, refetch } = useQuery({
+    queryKey: ["advice"],
+    queryFn: getRandomAdvice,
+    refetchOnWindowFocus: false,
+  });
 
-  const adviceData = async () => {
-    setLoading(true);
-    const data = await getRandomAdvice();
-    setAdvice(data);
-    setLoading(false);
-  };
-
-  useEffect(() => {
-    adviceData();
-  }, []);
+  if (error) return console.log(error.message);
 
   return (
     <CardAdvice>
       <Header>
-        <Title>advice #{advice.id}</Title>
+        <Title>advice #{data?.id}</Title>
       </Header>
       <Content>
-        {isLoading ? (
+        {isFetching ? (
           <Loading src={loadingImg} />
         ) : (
-          <Text>{advice.advice}</Text>
+          <Text>{data?.advice}</Text>
         )}
         <WrapperImg>
           <Img src={divider} />
         </WrapperImg>
-        <Button onClick={adviceData}>
+        <Button onClick={() => refetch()}>
           <Img src={dice} alt="Dice" />
         </Button>
       </Content>
