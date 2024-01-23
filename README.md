@@ -21,6 +21,8 @@ I did this project using an API named [Advice Slip](https://api.adviceslip.com/)
 
 ![Styled Components](https://img.shields.io/badge/styled--components-DB7093?style=for-the-badge&logo=styled-components&logoColor=white)
 
+![React Query](https://img.shields.io/badge/-React%20Query-FF4154?style=for-the-badge&logo=react%20query&logoColor=white)
+
 ## Getting Started
 
 To run the project on your machine reads the following steps.
